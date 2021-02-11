@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.shoppingMall.Dto.ProductDto;
+import com.shoppingMall.Dto.ProductRequestDto;
+import com.shoppingMall.Dto.ProductResponseDto;
 
 @Service
 public interface ProductService {
 
-	public ProductDto saveProduct(Long id,ProductDto productDto);
-	public List<ProductDto> allProducts();
-	public ProductDto deleteProductById(long id);
-	public ProductDto getProductById(long id); 
-	public ProductDto updateProductById(long id,ProductDto productDto);
+	public ProductResponseDto saveProduct(String id,ProductRequestDto productDto);
+	public List<ProductRequestDto> allProducts();
+	public ProductRequestDto deleteProductById(String id);
+	public ProductRequestDto getProductById(String id); 
+	public ProductRequestDto updateProductById(String id,ProductRequestDto productDto);
 
 
 }

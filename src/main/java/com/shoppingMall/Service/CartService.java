@@ -9,10 +9,10 @@ import com.shoppingMall.Dto.CartDto;
 @Service
 public interface CartService {
 	
-	public CartDto saveCart(Long id,CartDto cartDto);
+	public CartDto saveCart(CartDto cartDto);
 	public List<CartDto> allCarts();
-	public CartDto deleteCartById(Long id);
-	public CartDto getCartById(Long id); 
-	public CartDto updateCartById(Long id,CartDto cartDto);
+	public CartDto deleteCartById(String id);
+	public CartDto getCartById(String id); 
+	public CartDto updateCartById(String id,CartDto cartDto);
 
 } 

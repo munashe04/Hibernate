@@ -9,28 +9,16 @@ import com.shoppingMall.entities.Cart;
 
 
 @Component
-public class ProductDto {
+public class ProductRequestDto {
 	
-public ProductDto() {
+public ProductRequestDto() {
 	}
 
-	private long id;
+	
 	private String name;
 	private double price;
 	private Date dateOfPurchase;
-	/*private Cart cart;
-	public Cart getCart() {
-		return cart;
-	}
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}*/
-	public long getId() {
-		return id;
-	}
-	public void setId(long l) {
-		this.id = l;
-	}
+	
 	public String getName() {
 		return name;
 	}

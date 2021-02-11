@@ -3,8 +3,10 @@ package com.shoppingMall.entities;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -25,8 +29,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "Product")
 public class Product {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "ID", columnDefinition = "VARCHAR(40)")
+    private String id;
 	private String name;
 	private double price;
 	private String dateOfPurchase;
@@ -39,13 +45,16 @@ public class Product {
 		return cart;
 	}
 	
+	/*public void setCart(Optional<Product> cart2) {
+		this.cart = cart2;
+	}*/
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -66,7 +75,7 @@ public class Product {
 	public void setDateOfPurchase(String dateOfPurchase) {
 		this.dateOfPurchase = dateOfPurchase;
 	}
-	public Product(Long id, String name, double price, String dateOfPurchase,Cart cart) {
+	public Product(String id, String name, double price, String dateOfPurchase,Cart cart) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -77,7 +86,6 @@ public class Product {
 	public Product() {
 		
 	}
-	
 	
 	
 }

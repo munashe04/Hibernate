@@ -4,44 +4,51 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.shoppingMall.Dto.ProductDto;
+import com.shoppingMall.Dto.ProductRequestDto;
+import com.shoppingMall.Dto.ProductResponseDto;
+import com.shoppingMall.Repositories.CartRepository;
+import com.shoppingMall.entities.Cart;
 import com.shoppingMall.entities.Product;
 
 @Component
 public class ProductConverter {
-
+	@Autowired
+	CartRepository repo;
 	
-	public ProductDto productToDto(Product product) {
-		ProductDto productDto = new ProductDto();
-		productDto.setName(product.getName());
-		productDto.setId(product.getId());
-		productDto.setPrice(product.getPrice());
-		//productDto.setCart(product.getCart());
+	
+	Cart cart = new Cart();
+	
+	public ProductResponseDto productToDto(Product product) {
+		ProductResponseDto productResponseDto = new ProductResponseDto();
+		productResponseDto.setName(product.getName());
+		productResponseDto.setId(product.getId());
+		productResponseDto.setPrice(product.getPrice());
 		
-		
-		return productDto;
+		return productResponseDto;
 	}
-	public List<ProductDto>productToDto(List<Product>product){
+	public List<ProductResponseDto>productToDto(List<Product>product){
 		return product.stream().map(x -> productToDto(x)).collect(Collectors.toList());
 	}
-	public Product dtoToProduct(ProductDto productDto) {
+	public Product dtoToProduct(ProductRequestDto productDto) {
 		Product product = new Product();
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date today = new Date();
 		
 		product.setName(productDto.getName());
-		product.setId(productDto.getId());
+		//product.setId(productDto.getId());
 		product.setPrice(productDto.getPrice());
 		product.setDateOfPurchase(dateFormat.format(today));
-		//product.setCart(productDto.getCart());
 		
 		return product;
 	}
-	public List<Product>dtoToProduct(List<ProductDto>productDto){
-		return productDto.stream().map(x -> dtoToProduct(x)).collect(Collectors.toList());
+	public List<Product>dtoToProduct(List<ProductRequestDto>productDto){
+		return productDto.stream().map(x -> dtoToProduct( x)).collect(Collectors.toList());
 	}
 }

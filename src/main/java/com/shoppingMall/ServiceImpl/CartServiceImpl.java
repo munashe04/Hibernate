@@ -23,7 +23,7 @@ public class CartServiceImpl implements CartService {
 	
 
 	@Override
-	public CartDto saveCart(Long id, CartDto cartDto) {
+	public CartDto saveCart(CartDto cartDto) {
 	repo.save(conv.dtoToEntity(cartDto));
 		return null;
 	}
@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartDto deleteCartById(Long id) {
+	public CartDto deleteCartById(String id) {
 		Optional<Cart> cart = repo.findById(id);
 		if(cart.isPresent()) {
 			repo.deleteById(id);
@@ -45,7 +45,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartDto getCartById(Long id) {
+	public CartDto getCartById(String id) {
 		Optional<Cart> cart = repo.findById(id);
 		if(cart.isPresent()) {
 			conv.cartToDto(cart.get());
@@ -54,7 +54,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartDto updateCartById(Long id, CartDto cartDto) {
+	public CartDto updateCartById(String id, CartDto cartDto) {
 		Optional<Cart> cart = repo.findById(id);
 		if(cart.isPresent()) {
 			Cart newCart = new Cart();

@@ -17,14 +17,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Cart")
 public class Cart {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "ID", columnDefinition = "VARCHAR(40)")
+	
+    private String id;
 	private String name;
 	private String colour;
 	private int numberOfWheels;
@@ -43,10 +48,10 @@ public class Cart {
 	public void setProduct(List<Product> product) {
 		this.products = product;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -74,7 +79,7 @@ public class Cart {
 	public void setDateIssued(String dateIssued) {
 		this.dateIssued = dateIssued;
 	}
-	public Cart(Long id, String name, String colour, int numberOfWheels, String dateIssued,List<Product> product) {
+	public Cart(String id, String name, String colour, int numberOfWheels, String dateIssued,List<Product> product) {
 		super();
 		this.id = id;
 		this.name = name;

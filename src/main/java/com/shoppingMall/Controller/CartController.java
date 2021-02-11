@@ -25,8 +25,8 @@ public class CartController {
 		
 	
 	 @PostMapping
-	 public void saveCart( Long id,@RequestBody CartDto cartDto) {
-		serv.saveCart(id,cartDto);
+	 public void saveCart( @RequestBody CartDto cartDto) {
+		serv.saveCart(cartDto);
 	 }
 	 
 	@GetMapping
@@ -35,16 +35,16 @@ public class CartController {
 	 }
 	 
 	 @GetMapping(path ="{id}")
-	 public CartDto getById(@PathVariable ("id") Long id){
+	 public CartDto getById(@PathVariable ("id") String id){
 		 return serv.getCartById(id);
 	 }
 	 @PutMapping(path ="{id}")
-	 public CartDto updateById(@PathVariable ("id") Long id,@RequestBody CartDto cartDto) {
+	 public CartDto updateById(@PathVariable ("id") String id,@RequestBody CartDto cartDto) {
 		 System.out.println("Controller");
 		return serv.updateCartById(id,cartDto);
 	 }
 	 @DeleteMapping(path ="{id}")
-			 public CartDto deleteById(@PathVariable ("id") Long id){
+			 public CartDto deleteById(@PathVariable ("id") String id){
 				return serv.deleteCartById(id);
 			 }
 	

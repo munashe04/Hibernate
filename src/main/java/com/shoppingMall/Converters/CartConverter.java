@@ -31,7 +31,7 @@ public class CartConverter {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date today = new Date();
 	
-		cart.setId(cartDto.getId());
+		//cart.setId(1);
 		cart.setName(cartDto.getName());
 		cart.setNumberOfWheels(cartDto.getNumberOfWheels());
 		cart.setColour(cartDto.getColour());

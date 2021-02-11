@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shoppingMall.Dto.ProductDto;
+import com.shoppingMall.Dto.ProductRequestDto;
 import com.shoppingMall.Service.ProductService;
 
 @RestController
@@ -23,27 +23,27 @@ public class ProductController {
 	 ProductService serv;
 		
 	
-	 @PostMapping
-	 public void saveEntity( Long id,@RequestBody ProductDto productDto) {
-		serv.saveProduct(id,productDto);
+	 @PostMapping(path = "/{id}")
+	 public void saveEntity(@PathVariable String id,@RequestBody ProductRequestDto productDto) {
+		serv.saveProduct(id, productDto);
 	 }
 	 
 	@GetMapping
-	 public List<ProductDto> getAll() {
+	 public List<ProductRequestDto> getAll() {
 		return serv.allProducts();
 	 }
 	 
 	 @GetMapping(path ="{id}")
-	 public ProductDto getById(@PathVariable ("id") long id){
+	 public ProductRequestDto getById(@PathVariable ("id") String id){
 		 return serv.getProductById(id);
 	 }
 	 @PutMapping(path ="{id}")
-	 public ProductDto updateById(@PathVariable ("id") long id,@RequestBody ProductDto dto) {
+	 public ProductRequestDto updateById(@PathVariable ("id") String id,@RequestBody ProductRequestDto dto) {
 		 System.out.println("Controller");
 		return serv.updateProductById(id,dto);
 	 }
 	 @DeleteMapping(path ="{id}")
-			 public ProductDto deleteById(@PathVariable ("id") long id){
+			 public ProductRequestDto deleteById(@PathVariable ("id") String id){
 				return serv.deleteProductById(id);
 			 }
 }
